@@ -1,10 +1,23 @@
-import React from "react";
+// src/components/Navbar.js
 
-const Navbar = () => {
+import React from "react";
+import { NavLink } from "react-router-dom";
+import Logout from "./Logout";
+
+const Navbar = ({ isLoggedIn, setIsLoggedIn, setUser }) => {
   return (
-    <div>
-      <h1>React Navbar.js</h1>
-    </div>
+    <nav className="navbar">
+      <NavLink to="/">Home</NavLink>
+      <NavLink to="/posts">Posts</NavLink>
+      {isLoggedIn ? (
+        <>
+          <NavLink to="/profile">Profile</NavLink>
+          <Logout setUser={setUser} setIsLoggedIn={setIsLoggedIn} />
+        </>
+      ) : (
+        <NavLink to="/login">Login</NavLink>
+      )}
+    </nav>
   );
 };
 

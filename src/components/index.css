@@ -1,0 +1,57 @@
+/* index.css */
+body {
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+  
+  .header {
+    background-color: rgb(230, 228, 228);
+    padding: 20px;
+    display: flex;
+    align-items: center; /* Add this line */
+    justify-content: space-between;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 100px;
+}
+  
+  .header h1 {
+    margin: 0;
+  }
+  
+.navbar {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+  
+  .navbar a {
+    font-size: 18px;
+    text-decoration: none;
+    color: #333;
+  }
+  
+  .navbar a:hover {
+    color: #780c0c;
+  }
+ 
+  .main-content {
+    display: flex;
+    flex-grow: 1;
+    justify-content: center;
+    align-items: center;
+  }
+  #logoutButt {
+    padding: 12px 20px;
+    background-color: #6a11cb;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
