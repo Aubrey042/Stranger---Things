@@ -1,0 +1,62 @@
+/* AuthForm.css */
+.login-container,
+.register-container {
+  background-color: #ffffff;
+  width: 400px;
+  padding: 40px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 30px;
+  font-weight: 600;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+input[type="text"],
+input[type="password"] {
+  padding: 12px 20px;
+  border: 1px solid #d9d9d9;
+  border-radius: 5px;
+  font-size: 14px;
+  margin-bottom: 20px;
+  width: 355px;
+}
+
+#loginButt,
+button[type="submit"] {
+  padding: 12px 20px;
+  background-color: #6a11cb;
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #4b0fa8;
+}
+
+p {
+  text-align: center;
+  margin-top: 10px;
+}
+
+a {
+  color: #6a11cb;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: #4b0fa8;
+}
