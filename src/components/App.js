@@ -44,6 +44,7 @@ const App = () => {
         setIsLoggedIn={setIsLoggedIn}
         setUser={setUser}
         setToken={setToken}
+        isLoggedIn={isLoggedIn}
         />
         </header>
         <main className="main-content">
