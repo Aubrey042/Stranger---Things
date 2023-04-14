@@ -18,21 +18,19 @@ const Login = ({
   
     const handleSubmit = async (event) => {
         event.preventDefault();
-        // make an api call
         const userToAuth = { user: { username: username, password: password } };
-      
         const data = await loginUser(userToAuth);
-      
         if (data.token) {
-          logIn(data.token, setUser, setIsLoggedIn);
-          setUsername("");
-          setPassword("");
-          navigate("/posts");
+            setToken(data.token);
+            setUser(data.user);
+            setIsLoggedIn(true);
+            setUsername("");
+            setPassword("");
+            navigate("/posts");
+            console.log(isLoggedIn)
         }
-      };
-      
-      
-  
+    };
+    console.log(isLoggedIn)
     return (
       <>
         <div className="login-container">

@@ -5,6 +5,8 @@ import { getPosts } from '../api';
 import { getMe } from '../api/auth';
 import './index.css';
 
+
+
 const App = () => {
     const [posts, setPosts] = useState([]);
     const [user, setUser] = useState({});
@@ -44,6 +46,7 @@ const App = () => {
         setIsLoggedIn={setIsLoggedIn}
         setUser={setUser}
         setToken={setToken}
+        isLoggedIn={isLoggedIn}
         />
         </header>
         <main className="main-content">

@@ -1,0 +1,100 @@
+.post-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.post-buttons button {
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+  padding: 12px 24px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin-right: 10px;
+  border-radius: 4px;
+}
+
+.post-buttons button:hover {
+  background-color: #3e8e41;
+}
+
+/* Container for the entire component */
+.posts-container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* Button styling */
+.button-container {
+  display: flex;
+  justify-content: space-around;
+  margin: 1rem 0;
+}
+
+.button-container button {
+  background-color: #0046be;
+  color: #fff;
+  font-size: 1rem;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+/* Container for the entire component */
+.posts-container {
+  max-width: 800px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+/* Styling for each individual post */
+article {
+  margin: 0;
+  padding: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+
+
+}
+
+article h2 {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+article p {
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+article p:last-child {
+  margin-bottom: 0;
+}
+
+.post-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.post-buttons button {
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+  padding: 12px 24px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin-right: 10px;
+  border-radius: 4px;
+}
+
+.post-buttons button:hover {
+  background-color: #3e8e41;
+}

@@ -1,3 +1,5 @@
+import './posts.css';
+
 import React from 'react';
 import {
   createNewPost,
@@ -34,10 +36,12 @@ const Posts = ({ posts, setPosts, isLoggedIn, user }) => {
       {isLoggedIn && user ? (
         <>
           <h1>Hello, {user.username}! From Posts.js</h1>
-          <button></button>
-          <button></button>
-          <button></button>
-          <button></button>
+          <div className="button-container">
+            <button></button>
+            <button></button>
+            <button></button>
+            <button></button>
+          </div>
           {posts.map((post) => {
             return (
               <article key={post.id}>
@@ -51,51 +55,53 @@ const Posts = ({ posts, setPosts, isLoggedIn, user }) => {
       ) : (
         <>
           <h1>Hello unauthenticated person! From Posts.js</h1>
-          <button
-            onClick={async () => {
-              const newPost = await createNewPost(postToCreate);
-              setPosts([newPost, ...posts]);
-            }}
-          >
-            Create New Post
-          </button>
-          <button
-            onClick={async () => {
-              const updatedPost = await updateEntirePost(
-                postId,
-                postToCompletelyUpdate
-              );
-              const listToReturn = posts.filter(
-                (post) => post.id !== updatedPost.id
-              );
-              setPosts([updatedPost, ...listToReturn]);
-            }}
-          >
-            Update PUT Post
-          </button>
-          <button
-            onClick={async () => {
-              const updatedPost = await updatePartialPost(
-                postId2,
-                filedsToUpdate
-              );
-              const listToReturn = posts.filter(
-                (post) => post.id !== updatedPost.id
-              );
-              setPosts([updatedPost, ...listToReturn]);
-            }}
-          >
-            Update PATCH Post
-          </button>
-          <button
-            onClick={async () => {
-              // const postDeleted = await deletePost(postId3);
-              await deletePost(postId3);
-              setPosts([...posts.filter((post) => post.id !== postId3)]);
-            }}
-          >
-            Delete Post
-          </button>
+          <div className="button-container">
+            <button
+              onClick={async () => {
+                const newPost = await createNewPost(postToCreate);
+                setPosts([newPost, ...posts]);
+              }}
+            >
+              Create New Post
+            </button>
+            <button
+              onClick={async () => {
+                const updatedPost = await updateEntirePost(
+                  postId,
+                  postToCompletelyUpdate
+                );
+                const listToReturn = posts.filter(
+                  (post) => post.id !== updatedPost.id
+                );
+                setPosts([updatedPost, ...listToReturn]);
+              }}
+            >
+              Update PUT Post
+            </button>
+            <button
+              onClick={async () => {
+                const updatedPost = await updatePartialPost(
+                  postId2,
+                  filedsToUpdate
+                );
+                const listToReturn = posts.filter(
+                  (post) => post.id !== updatedPost.id
+                );
+                setPosts([updatedPost, ...listToReturn]);
+              }}
+            >
+              Update PATCH Post
+            </button>
+            <button
+              onClick={async () => {
+                // const postDeleted = await deletePost(postId3);
+                await deletePost(postId3);
+                setPosts([...posts.filter((post) => post.id !== postId3)]);
+              }}
+            >
+              Delete Post
+            </button>
+          </div>
           {posts.map((post) => {
             return (
               <article key={post.id}>

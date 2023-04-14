@@ -1,13 +1,13 @@
-const BASE = 'https://jsonplace-univclone.herokuapp.com';
+const BASE = 'https://strangers-things.herokuapp.com/api/2303-ftb-et-web-ft';
 
 export const getPosts = async () => {
   try {
     const response = await fetch(`${BASE}/posts`);
 
-    const data = await response.json();
+    const {data} = await response.json();
 
     // console.log(data);
-    return data;
+    return data.posts;
   } catch (error) {
     console.error(error);
   }
