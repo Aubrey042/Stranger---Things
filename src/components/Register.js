@@ -1,5 +1,3 @@
-// src/components/Register.js
-
 import React, { useState } from "react";
 import { useNavigate } from "react-router";
 import { registerUser } from "../api/auth";
@@ -7,26 +5,30 @@ import { registerUser } from "../api/auth";
 const Register = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [token, setToken] = useState("");
   const [passwordConfirmation, setPasswordConfirmation] = useState("");
   const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
+  
     if (password !== passwordConfirmation) {
       alert("Passwords do not match.");
       return;
     }
-
+  
     const newUser = { user: { username, password } };
-    const data = await registerUser(newUser);
-
-    if (data.success) {
-      navigate("/login");
+    const response = await registerUser(newUser);
+    if (response.success) {
+      const { token } = response.data;
+      setToken(token);
+      localStorage.setItem("token", token);
+      navigate("/posts");
     } else {
-      alert(data.error.message);
+      alert(response.error.message);
     }
   };
+  
 
   return (
     <div className="register-container">

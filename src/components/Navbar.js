@@ -5,7 +5,7 @@ import { NavLink } from "react-router-dom";
 import Logout from "./Logout";
 
 const Navbar = ({ isLoggedIn, setIsLoggedIn, setUser }) => {
- console.log(isLoggedIn, "NavBar")
+//  console.log(isLoggedIn, "NavBar")
     return (
     <nav className="navbar">
       <NavLink to="/">Home</NavLink>

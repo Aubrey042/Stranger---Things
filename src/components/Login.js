@@ -1,14 +1,11 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router";
 import { loginUser } from "../api/auth";
-import { logIn } from "../helpers/auth";
 import './Login.css'
 const Login = ({
     isLoggedIn,
     setIsLoggedIn,
-    token,
     setToken,
-    user,
     setUser,
   }) => {
     const [username, setUsername] = useState('');

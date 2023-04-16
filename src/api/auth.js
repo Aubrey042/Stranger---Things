@@ -1,3 +1,5 @@
+const BASE = 'https://strangers-things.herokuapp.com/api/2303-ftb-et-web-ft'
+
 export const getMe = async (token) => {
     try {
       const response = await fetch(
@@ -11,9 +13,7 @@ export const getMe = async (token) => {
         }
       );
   
-      const { success, error, data } = await response.json();
-      console.log({ success, error, data });
-  
+      const { success, error, data } = await response.json();  
       return { success, error, user: data };
     } catch (error) {
       console.error(error);
@@ -39,6 +39,7 @@ export const getMe = async (token) => {
         const { token, message } = data;
         const { success, error, user } = await getMe(token);
         if (user) {
+          user.token = token; // Store token in user object
           localStorage.setItem('token', token);
           return { token, message, user };
         }
@@ -48,11 +49,11 @@ export const getMe = async (token) => {
         const { name, message } = data;
         return { name, message };
       }
-      console.log(success, error, data);
     } catch (error) {
       console.error(error);
     }
   };
+  
 
 export const registerUser = async (userObject) => {
     try {

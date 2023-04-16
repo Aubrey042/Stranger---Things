@@ -1,112 +1,93 @@
-import React from 'react';
-import {
-  createNewPost,
-  updateEntirePost,
-  updatePartialPost,
-  deletePost,
-} from '../api';
+import React, { useState } from 'react';
+import CreatePost from './CreatePost';
+import SearchForm from './SearchForm';
+import { deletePost } from '../api';
+import { sendMessage } from '../api';
 
-const Posts = ({ posts, setPosts, isLoggedIn, user }) => {
-  const postId = 1;
-  const postId2 = 2;
-  const postId3 = 3;
+const Posts = ({ posts, setPosts, isLoggedIn, user, token }) => {
+  const [messageContent, setMessageContent] = useState('');
+  const [searchTerm, setSearchTerm] = useState(''); 
 
-  const postToCreate = {
-    title: 'Our New Post',
-    body: 'This post is mostly about the bestestest kitten, my Grim!',
-    userId: 1,
+  const handleDelete = async (postId) => {
+    const result = await deletePost(postId, token);
+    if (result.success) {
+      setPosts(posts.filter((post) => post._id !== postId));
+    } else {
+      console.error('Error deleting the post.');
+    }
   };
 
-  const postToCompletelyUpdate = {
-    id: `${postId}`,
-    title: 'Our updated post with id: 1',
-    body: 'I also have a slither puppy name Nagini!',
-    userId: 1,
+  const handleSendMessage = async (postId, messageContent) => {
+    const result = await sendMessage(postId, messageContent, token);
+    if (result.success) {
+      console.log('Message sent successfully');
+    } else {
+      console.error('Error sending the message');
+    }
   };
 
-  const filedsToUpdate = {
-    title: "Adonis is my pitty-mix, and he's now in the spotlight. id: 2",
+  const handleInputChange = (event) => {
+    setMessageContent(event.target.value);
   };
 
-  console.log(posts);
+  function postMatches(post, text) {
+    return (
+      post.title.toLowerCase().includes(text.toLowerCase()) ||
+      post.description.toLowerCase().includes(text.toLowerCase()) ||
+      post.author.username.toLowerCase().includes(text.toLowerCase())
+    );
+  }
+
+  const filteredPosts = posts.filter((post) => postMatches(post, searchTerm));
+  const postsToDisplay = searchTerm.length ? filteredPosts : posts;
+
   return (
     <>
-      {isLoggedIn && user ? (
-        <>
-          <h1>Hello, {user.username}! From Posts.js</h1>
-          <button></button>
-          <button></button>
-          <button></button>
-          <button></button>
-          {posts.map((post) => {
-            return (
-              <article key={post.id}>
-                <h2>{post.title}</h2>
-                <p>{post.body}</p>
-                <p>Author id: {post.userId}</p>
-              </article>
-            );
-          })}
-        </>
-      ) : (
-        <>
-          <h1>Hello unauthenticated person! From Posts.js</h1>
-          <button
-            onClick={async () => {
-              const newPost = await createNewPost(postToCreate);
-              setPosts([newPost, ...posts]);
-            }}
-          >
-            Create New Post
-          </button>
-          <button
-            onClick={async () => {
-              const updatedPost = await updateEntirePost(
-                postId,
-                postToCompletelyUpdate
-              );
-              const listToReturn = posts.filter(
-                (post) => post.id !== updatedPost.id
-              );
-              setPosts([updatedPost, ...listToReturn]);
-            }}
-          >
-            Update PUT Post
-          </button>
-          <button
-            onClick={async () => {
-              const updatedPost = await updatePartialPost(
-                postId2,
-                filedsToUpdate
-              );
-              const listToReturn = posts.filter(
-                (post) => post.id !== updatedPost.id
-              );
-              setPosts([updatedPost, ...listToReturn]);
-            }}
-          >
-            Update PATCH Post
-          </button>
-          <button
-            onClick={async () => {
-              // const postDeleted = await deletePost(postId3);
-              await deletePost(postId3);
-              setPosts([...posts.filter((post) => post.id !== postId3)]);
-            }}
-          >
-            Delete Post
-          </button>
-          {posts.map((post) => {
-            return (
-              <article key={post.id}>
-                <h2>{post.title}</h2>
-                <p>{post.body}</p>
-                <p>Author id: {post.userId}</p>
-              </article>
-            );
-          })}
-        </>
-      )}
+      <CreatePost
+        user={user}
+        isLoggedIn={isLoggedIn}
+        posts={posts}
+        setPosts={setPosts}
+        token={token}
+      />
+      <SearchForm searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
+      <div className="posts-container">
+        {postsToDisplay.map((post) => {
+          const isAuthor = user && post.author._id === user._id;
+          return (
+            <article className="post" key={post._id}>
+              <h2>{post.title}</h2>
+              <p>{post.description}</p>
+              <p>Author: {post.author.username} Price: {post.price}</p>
+              {isAuthor ? (
+                <>
+                  <button onClick={() => handleDelete(post._id)}>
+                    Delete Post
+                  </button>
+                </>
+              ) : (
+                isLoggedIn && (
+                  <>
+                    <input
+                      type="text"
+                      value={messageContent}
+                      onChange={handleInputChange}
+                      placeholder="Type your message here"
+                    />
+                    <button
+                      onClick={() =>
+                        handleSendMessage(post._id, messageContent)
+                      }
+                    >
+                      Send Message
+                    </button>
+                  </>
+                )
+              )}
+            </article>
+          );
+        })}
+      </div>
     </>
   );
 };

@@ -1,30 +1,26 @@
 import React from 'react';
-import Posts from './Posts';
+import { useNavigate } from 'react-router-dom';
 
 const Welcome = (props) => {
-  console.log(props);
-  const { isLoggedIn, user, posts, setPosts } = props;
+  const { isLoggedIn, user } = props;
+  const navigate = useNavigate();
+
+  const handleLoginButtonClick = () => {
+    navigate('/login');
+  };
+
   return (
     <>
       {isLoggedIn ? (
         <>
-          <h1>Hello, {user.username}! Welcome back!</h1>
-          <Posts
-            posts={posts}
-            setPosts={setPosts}
-            isLoggedIn={isLoggedIn}
-            user={user}
-          />
+          <h1>Welcome to Stranger's Things, {user.username}!</h1>
+          
         </>
       ) : (
         <>
-          <h1>Hello to you! Please login to get started.</h1>
-          <Posts
-            posts={posts}
-            setPosts={setPosts}
-            isLoggedIn={isLoggedIn}
-            user={user}
-          />
+          <h1>Welcome to Stranger's Things! Please login or register if you don't have an account.</h1>
+          <button onClick={handleLoginButtonClick}>Login</button>
+          
         </>
       )}
     </>
